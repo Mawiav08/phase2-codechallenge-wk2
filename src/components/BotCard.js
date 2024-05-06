@@ -23,7 +23,6 @@ const BotCard = props => {
     <div
       className="ui card"
       key={bot.id}
-      // onClick={props.handleClick ? () => props.handleClick(bot.id) : null}
       onClick={() => props.renderSpecs(bot.id)}
     >
       <div className="image">

@@ -2,7 +2,6 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 const BotCollection = props => {
-  //your code here
     console.log(props)
   return (
     <div className="ui four column grid">

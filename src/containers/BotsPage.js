@@ -28,7 +28,6 @@ class BotsPage extends React.Component {
 
   handleClick = (selected) => {
     const { bots, myBots } = this.state;
-    // console.log(if (myBots.map(bot => bot.id.includes(bots.filter(bot => bot.id === selected)))))
     if (!myBots.includes(bots.filter(bot => bot.id === selected))) {
       this.setState({
         myBots: [...this.state.myBots, this.state.bots.filter(bot => bot.id === selected)[0]]
