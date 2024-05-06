@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function BotCollection({ enlistBot }) {
+function BotCollection({ enlistBot,}) {
   const [bots, setBots] = useState([]);
 
   useEffect(() => {

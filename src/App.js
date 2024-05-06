@@ -1,7 +1,6 @@
 import './App.css';
-// App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import BotSpecs from './components/BotSpecs';
@@ -10,7 +9,6 @@ import SortBar from './components/SortBar';
 function App() {
   const [army, setArmy] = useState([]);
   const [bots, setBots] = useState([]);
-  const [sortedBy, setSortedBy] = useState(null);
 
   const enlistBot = (bot) => {
     setArmy([...army, bot]);
@@ -25,29 +23,28 @@ function App() {
     setArmy(army.filter(b => b.id !== bot.id));
   };
 
-  const sortBy = (criteria) => {
-    const sortedBots = [...bots].sort((a, b) => a[criteria] - b[criteria]);
-    setBots(sortedBots);
-    setSortedBy(criteria);
-  };
-
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <SortBar sortBy={sortBy} />
-            <BotCollection bots={sortedBy ? bots : army} enlistBot={enlistBot} />
-          </Route>
-          <Route path="/your-bot-army">
-            <YourBotArmy army={army} releaseBot={releaseBot} dischargeBot={dischargeBot} />
-          </Route>
-          <Route path="/bots/:botId" component={BotSpecs} />
-        </Switch>
-      </div>
-    </Router>
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <BotCollection
+                army={army}
+                enlistBot={enlistBot}
+                releaseBot={releaseBot}
+                dischargeBot={dischargeBot}
+              >
+                <Route path="/" element={<YourBotArmy army={army} releaseBot={releaseBot} dischargeBot={dischargeBot} />} />
+                <Route path="/" element={<BotSpecs />} />
+                <Route path="/" element={<SortBar />} />
+              </BotCollection>
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
   );
 }
-
 export default App;
-
